@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Playfair+Display:wght@400;700&family=Outfit:wght@400;700&family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Scheherazade+New:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--theme-font-sans);
+  --font-arabic: var(--theme-font-arabic);
+  --color-primary: var(--theme-color-primary);
+  --color-primary-dark: var(--theme-color-primary-dark);
+  --color-primary-light: var(--theme-color-primary-light);
+
+  /* Primary shades for compatibility with legacy code */
+  --color-primary-50: #ecfdf5;
+  --color-primary-100: #d1fae5;
+  --color-primary-200: #a7f3d0;
+  --color-primary-300: #6ee7b7;
+  --color-primary-400: #34d399;
+  --color-primary-500: #10b981;
+  --color-primary-600: #059669;
+  --color-primary-700: #047857;
+  --color-primary-800: #065f46;
+  --color-primary-900: #064e3b;
+}
+
+@layer base {
+  :root {
+    --base-font-size: 16px;
+    font-size: var(--base-font-size);
+    --theme-font-sans: "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+    --theme-font-arabic: "Amiri", "Scheherazade New", serif;
+    --theme-color-primary: #10b981;
+    --theme-color-primary-dark: #059669;
+    --theme-color-primary-light: #34d399;
+  }
+
+  body {
+    font-family: var(--theme-font-sans);
+    font-size: var(--base-font-size);
+    -webkit-tap-highlight-color: transparent;
+    @apply bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300;
+  }
+}
+
+/* Safe area padding for mobile devices */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top), 1.5rem);
+}
+
+/* Horizontal Scrollbar (for badges/tabs) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  @apply bg-slate-200 dark:bg-slate-800;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 2s infinite;
+}
+
+.dark .shimmer::after {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.1) 60%,
+    rgba(255, 255, 255, 0)
+  );
+}

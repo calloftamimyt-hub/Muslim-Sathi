@@ -1,0 +1,264 @@
+{
+  "entities": {
+    "Post": {
+      "title": "Post",
+      "description": "A social media post",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "authorUid": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorAvatarUrl": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "content": { "type": "string" },
+        "type": { "type": "string" },
+        "location": { "type": "string" },
+        "ameenCount": { "type": "number" },
+        "reactionsCount": { "type": "number" },
+        "reportsCount": { "type": "number" },
+        "reports": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["authorUid", "authorName", "content", "createdAt"]
+    },
+    "Reaction": {
+      "title": "Reaction",
+      "description": "A reaction to a post",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "userUid": { "type": "string" },
+        "type": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["postId", "userUid", "type", "createdAt"]
+    },
+    "CommentReaction": {
+      "title": "CommentReaction",
+      "description": "A reaction to a comment",
+      "type": "object",
+      "properties": {
+        "commentId": { "type": "string" },
+        "userUid": { "type": "string" },
+        "type": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["commentId", "userUid", "type", "createdAt"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "A comment on a post",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "parentCommentId": { "type": "string" },
+        "userUid": { "type": "string" },
+        "userName": { "type": "string" },
+        "userAvatarUrl": { "type": "string" },
+        "content": { "type": "string" },
+        "reactionsCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["postId", "userUid", "userName", "content", "createdAt"]
+    },
+    "Follow": {
+      "title": "Follow",
+      "description": "A follow relationship",
+      "type": "object",
+      "properties": {
+        "follower_id": { "type": "string" },
+        "following_id": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["follower_id", "following_id", "createdAt"]
+    },
+    "Report": {
+      "title": "Report",
+      "description": "A report on a post",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "userUid": { "type": "string" },
+        "reason": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["postId", "userUid", "reason", "createdAt"]
+    },
+    "BugReport": {
+      "title": "BugReport",
+      "description": "A bug report from a user",
+      "type": "object",
+      "properties": {
+        "userUid": { "type": "string" },
+        "userName": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "appVersion": { "type": "string" },
+        "deviceModel": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userUid", "title", "description", "createdAt"]
+    },
+    "User": {
+      "title": "User",
+      "description": "A user profile",
+      "type": "object",
+      "properties": {
+        "location": { "type": "string" },
+        "displayName": { "type": "string" },
+        "displayNameLower": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "username": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "client"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Ad": {
+      "title": "Ad",
+      "description": "An advertisement",
+      "type": "object",
+      "properties": {
+        "imageUrl": { "type": "string" },
+        "redirectLink": { "type": "string" },
+        "category": { "type": "string", "enum": ["home", "social", "all"] },
+        "type": { "type": "string", "enum": ["small", "large"] },
+        "active": { "type": "boolean" }
+      },
+      "required": ["imageUrl", "redirectLink", "category", "type", "active"]
+    },
+    "UserData": {
+      "title": "UserData",
+      "description": "User tracker data",
+      "type": "object",
+      "properties": {
+        "prayerTracker": { "type": "object" },
+        "favoriteDuas": { "type": "array", "items": { "type": "object" } },
+        "favoriteAyats": { "type": "array", "items": { "type": "object" } },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Story": {
+      "title": "Story",
+      "description": "A user story",
+      "type": "object",
+      "properties": {
+        "authorUid": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorAvatarUrl": { "type": "string" },
+        "text": { "type": "string" },
+        "backgroundColor": { "type": "string" },
+        "textStyle": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["authorUid", "authorName", "text", "backgroundColor", "textStyle", "createdAt"]
+    },
+    "GlobalNotification": {
+      "title": "GlobalNotification",
+      "description": "A notification sent by admin to all users",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "link": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "body", "createdAt"]
+    },
+    "SocialSettings": {
+      "title": "SocialSettings",
+      "description": "Global social limits and settings",
+      "type": "object",
+      "properties": {
+        "postLimit": { "type": "number", "description": "Daily post limit per user. -1 for unlimited." },
+        "storyLimit": { "type": "number", "description": "Daily story limit per user. -1 for unlimited." }
+      },
+      "required": ["postLimit", "storyLimit"]
+    },
+    "UserDailyStats": {
+      "title": "UserDailyStats",
+      "description": "User's daily activity counts",
+      "type": "object",
+      "properties": {
+        "postCount": { "type": "number" },
+        "storyCount": { "type": "number" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["postCount", "storyCount", "lastUpdated"]
+    },
+    "OTP": {
+      "title": "OTP",
+      "description": "One-Time Password for password reset",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "code": { "type": "string" },
+        "expiresAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "code", "expiresAt"]
+    }
+  },
+  "firestore": {
+    "/otps/{otpId}": {
+      "schema": "OTP",
+      "description": "Collection of OTP codes"
+    },
+    "/settings/social": {
+      "schema": "SocialSettings",
+      "description": "Global social settings"
+    },
+    "/users/{userId}/daily_stats/{dateStr}": {
+      "schema": "UserDailyStats",
+      "description": "User's daily activity counts"
+    },
+    "/posts/{postId}": {
+      "schema": "Post",
+      "description": "Collection of posts"
+    },
+    "/reactions/{reactionId}": {
+      "schema": "Reaction",
+      "description": "Collection of reactions"
+    },
+    "/comment_reactions/{reactionId}": {
+      "schema": "CommentReaction",
+      "description": "Collection of comment reactions"
+    },
+    "/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Collection of comments"
+    },
+    "/follows/{followId}": {
+      "schema": "Follow",
+      "description": "Collection of follows"
+    },
+    "/reports/{reportId}": {
+      "schema": "Report",
+      "description": "Collection of reports"
+    },
+    "/bug_reports/{reportId}": {
+      "schema": "BugReport",
+      "description": "Collection of bug reports"
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of users"
+    },
+    "/user_data/{userId}": {
+      "schema": "UserData",
+      "description": "Collection of user tracker data"
+    },
+    "/stories/{storyId}": {
+      "schema": "Story",
+      "description": "Collection of user stories"
+    },
+    "/global_notifications/{notificationId}": {
+      "schema": "GlobalNotification",
+      "description": "Collection of global notifications sent by admin"
+    },
+    "/ads/{adId}": {
+      "schema": "Ad",
+      "description": "Collection of advertisements"
+    }
+  }
+}
